@@ -5,18 +5,22 @@
 class Side
 {
 public:
+	Side();
 	std::string name;
-	int middle;
-	int left_edge;
-	int right_edge;
-	int top_edge;
-	int bottom_edge;
-	int top_right_corner;
-	int bottom_right_corner;
-	int top_left_corner;
-	int bottom_left_corner;
+	char middle;
+	char left_edge;
+	char right_edge;
+	char top_edge;
+	char bottom_edge;
+	char top_right_corner;
+	char bottom_right_corner;
+	char top_left_corner;
+	char bottom_left_corner;
 	void set_color(char color);
-	//Side(std::string name);
+	void set_bottom_edge(char color);
+	void C_rotate();
+	void CC_rotate();
+	~Side();
 };
 
 #endif

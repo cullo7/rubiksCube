@@ -13,6 +13,7 @@ public:
 	Side bottom;
 	Side top;
 
+	Cube();
 	void C_right_turn();
 	void CC_right_turn();
 	void C_left_turn();
@@ -27,11 +28,12 @@ public:
 	void CC_bottom_turn();
 	void rotate_to_left();
 	void rotate_to_right();
-	void C_rotate(Side side);
-	void CC_rotate(Side side);
+	void rotate_to_top();
+	void rotate_to_bottom();
 	void set();
 	void print(Side side);
 	void print();
+	~Cube();
 };
 
 #endif

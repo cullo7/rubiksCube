@@ -7,13 +7,14 @@ int main()
 	Cube cube;
 	cube.set();
 	int input;
+	cube.print();
 
 
 	while(1)
 	{
-		std::cout<<"Enter a command from the list\n\n1 - right clockwise\n2 - right counterclockwise\n3 - left" 
-		<<"clockwise\n4 - left counterclockwise\n5 - front clockwise\n6 - front counterclockwise\n7 - back clockwise\n"
-		<<"8 - back counterclockwise\n9 - top clockwise\n10 - top counterclockwise\n11 - bottom clockwise\n12"
+		std::cout<<"\nEnter a command from the list\n\n1 - right clockwise\t2 - right counterclockwise\t\t3 - left" 
+		<<" clockwise\t\t4 - left counterclockwise\n5 - front clockwise\t6 - front counterclockwise\t\t7 - back clockwise\t\t"
+		<<"8 - back counterclockwise\n9 - top clockwise\t10 - top counterclockwise\t\t11 - bottom clockwise\t\t12"
 		<<" - bottom counterclockwise\n13 - rotate the cube to the right (making the previously left sidenow the front"
 		<< "side)\n14 - rotate cube to the left"<<std::endl;
 		std::cin>>input;
@@ -77,5 +78,5 @@ int main()
 				break;
 		}
 		cube.print();
-	}	
+	}
 }

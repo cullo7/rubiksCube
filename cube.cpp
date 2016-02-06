@@ -1,6 +1,18 @@
 #include <iostream>
 #include "cube.h"
 
+Cube :: Cube(void)
+{
+	front.name = "Front";
+	back.name = "Back";
+	left.name = "Left";
+	right.name = "Right";
+	bottom.name = "Bottom";
+	top.name = "Top";
+
+	std::cout<<"constructing Cube"<<std::endl;
+}
+
 void Cube :: C_right_turn() //clockwise rotation of right face of rubiks cube
 {
 	int temp1 = front.bottom_right_corner;
@@ -23,7 +35,7 @@ void Cube :: C_right_turn() //clockwise rotation of right face of rubiks cube
 	top.right_edge = temp2;
 	top.top_right_corner = temp3;
 
-	C_rotate(right);
+	right.C_rotate();
 
 }
 
@@ -49,7 +61,7 @@ void Cube :: CC_right_turn()
 	bottom.right_edge = temp2;
 	bottom.top_right_corner = temp3;
 	
-	CC_rotate(right);	
+	right.CC_rotate();	
 }
 
 void Cube :: C_left_turn()
@@ -74,7 +86,7 @@ void Cube :: C_left_turn()
 	bottom.left_edge = temp2;
 	bottom.top_left_corner = temp3;
 	
-	C_rotate(left);
+	left.C_rotate();
 }
 
 void Cube :: CC_left_turn() //clockwise rotation of left face of rubiks cube
@@ -99,7 +111,7 @@ void Cube :: CC_left_turn() //clockwise rotation of left face of rubiks cube
 	top.left_edge = temp2;
 	top.top_left_corner = temp3;
 
-	CC_rotate(left);
+	left.CC_rotate();
 }
 
 void Cube :: C_top_turn() //clockwise rotation of top face of rubiks cube
@@ -124,7 +136,7 @@ void Cube :: C_top_turn() //clockwise rotation of top face of rubiks cube
 	left.top_edge = temp2;
 	left.top_right_corner = temp1;
 
-	C_rotate(top);
+	top.C_rotate();
 }
 
 void Cube :: CC_top_turn()//counterclockwise rotation of top face of rubiks cube
@@ -149,7 +161,7 @@ void Cube :: CC_top_turn()//counterclockwise rotation of top face of rubiks cube
 	right.top_edge = temp2;
 	right.top_right_corner = temp1;
 
-	CC_rotate(top);
+	top.CC_rotate();
 
 }
 
@@ -175,7 +187,7 @@ void Cube :: C_bottom_turn()//clockwise rotation of bottom face of rubiks cube
 	right.bottom_edge = temp2;
 	right.bottom_right_corner = temp1;
 
-	C_rotate(bottom);
+	bottom.C_rotate();
 }
 
 void Cube :: CC_bottom_turn()//counterclockwise rotation of bottom face of rubiks cube
@@ -200,7 +212,7 @@ void Cube :: CC_bottom_turn()//counterclockwise rotation of bottom face of rubik
 	left.bottom_edge = temp2;
 	left.bottom_right_corner = temp1;
 
-	CC_rotate(bottom);
+	bottom.CC_rotate();
 }
 
 void Cube :: C_front_turn()//clockwise rotation of front face of rubiks cube
@@ -225,7 +237,7 @@ void Cube :: C_front_turn()//clockwise rotation of front face of rubiks cube
 	right.left_edge = temp2;
 	right.bottom_left_corner = temp1;
 
-	C_rotate(front);
+	front.C_rotate();
 }
 
 void Cube :: CC_front_turn()//counterclockwise rotation of front face of rubiks cube
@@ -250,7 +262,7 @@ void Cube :: CC_front_turn()//counterclockwise rotation of front face of rubiks 
 	left.right_edge = temp2;
 	left.top_right_corner = temp1;
 
-	CC_rotate(front);
+	front.CC_rotate();
 }
 
 void Cube :: C_back_turn()//clockwise rotation of back face of rubiks cube
@@ -275,7 +287,7 @@ void Cube :: C_back_turn()//clockwise rotation of back face of rubiks cube
 	left.left_edge = temp2;
 	left.top_left_corner = temp1;
 
-	C_rotate(back);
+	back.C_rotate();
 }
 
 void Cube :: CC_back_turn()
@@ -300,43 +312,7 @@ void Cube :: CC_back_turn()
 	right.right_edge = temp2;
 	right.bottom_right_corner = temp1;
 
-	CC_rotate(back);
-}
-
-void Cube :: C_rotate(Side side)
-{
-	int temp4 = side.top_edge;
-	int temp5 = side.top_left_corner;
-
-	side.top_left_corner = side.bottom_left_corner;
-	side.top_edge = side.left_edge;
-
-	side.bottom_left_corner = side.bottom_right_corner;
-	side.left_edge = side.bottom_edge;
-
-	side.bottom_right_corner = side.top_right_corner;
-	side.bottom_edge = side.right_edge;
-
-	side.top_right_corner = temp5;
-	side.right_edge = temp4;
-}
-
-void Cube :: CC_rotate(Side side)
-{
-	int temp4 = side.top_edge;
-	int temp5 = side.top_right_corner;
-
-	side.top_right_corner = side.bottom_right_corner;
-	side.top_edge = side.right_edge;
-
-	side.bottom_right_corner = side.bottom_left_corner;
-	side.right_edge = side.bottom_edge;
-
-	side.bottom_left_corner = side.top_left_corner;
-	side.bottom_edge = side.left_edge;
-
-	side.top_left_corner = temp5;
-	side.left_edge = temp4;
+	back.CC_rotate();
 }
 
 void Cube :: rotate_to_right()
@@ -346,8 +322,8 @@ void Cube :: rotate_to_right()
 	left = back;
 	back = right;
 	right = temp;
-	CC_rotate(top);
-	C_rotate(bottom);
+	top.CC_rotate();
+	bottom.C_rotate();
 }
 
 void Cube :: rotate_to_left()
@@ -357,8 +333,30 @@ void Cube :: rotate_to_left()
 	right = back;
 	back = left;
 	left = temp;
-	C_rotate(top);
-	CC_rotate(bottom);
+	top.C_rotate();
+	bottom.CC_rotate();
+}
+
+void Cube :: rotate_to_top()
+{
+	Side temp = front;
+	front = bottom;
+	bottom = back;
+	back = top;
+	top = temp;
+	right.C_rotate();
+	left.CC_rotate();
+}
+
+void Cube :: rotate_to_bottom()
+{
+	Side temp = front;
+	front = top;
+	top = back;
+	back = bottom;
+	bottom = temp;
+	left.C_rotate();
+	right.CC_rotate();
 }
 
 void Cube :: set() // sets each face to uniform number (color)
@@ -373,7 +371,7 @@ void Cube :: set() // sets each face to uniform number (color)
 
 void Cube :: print(Side side)
 {
-	std :: cout<<side.top_left_corner<<"|"<<side.top_edge<<"|"<<side.top_right_corner<<"\n"
+	std :: cout<<side.name<<":\n"<<side.top_left_corner<<"|"<<side.top_edge<<"|"<<side.top_right_corner<<"\n"
 	<<side.left_edge<<"|"<<side.middle<<"|"<<side.right_edge<<"\n"
 	<<side.bottom_left_corner<<"|"<<side.bottom_edge<<"|"<<side.bottom_right_corner<<"\n"<<std :: endl;
 }
@@ -386,4 +384,9 @@ void Cube :: print()
 	print(top);
 	print(left);
 	print(right);
+}
+
+Cube :: ~Cube(void)
+{
+	std::cout<<"deconstructing cube"<<std::endl;
 }
